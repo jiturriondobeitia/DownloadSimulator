@@ -1,4 +1,4 @@
-\# Download Simulator
+# Download Simulator
 
-\## Urrutiko biltegiak frogatzeko ariketa
+## Urrutiko biltegiak frogatzeko ariketa
 
