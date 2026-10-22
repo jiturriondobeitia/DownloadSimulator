@@ -39,30 +39,38 @@ namespace DownloadSimulator
                 // Hartu elementua.
                 Fitxategia f = fitxategiak.Take();
 
-                // Hasieratu ProgressBar.
-                auxProgressBar.Minimum = 0;
-                auxProgressBar.Maximum = 100;
-                auxProgressBar.Value = 0;
-                // Eguneratu jaisten ari garen fitxategiaren izena.
-                auxLabel.Text = f.Izena + " " + f.Tamaina + "MB / 0MB";
-
+                this.Invoke((Action)(()=> {
+                    // Hasieratu ProgressBar.
+                    auxProgressBar.Minimum = 0;
+                    auxProgressBar.Maximum = 100;
+                    auxProgressBar.Value = 0;
+                    // Eguneratu jaisten ari garen fitxategiaren izena.
+                    auxLabel.Text = f.Izena + " " + f.Tamaina + "MB / 0MB";
+                }));
+                
                 // Simulatu 200ms-duro 10MB jaisten ditugula.
                 int blockSize = 10;
                 for (int downloaded = 0; downloaded <= f.Tamaina; downloaded += blockSize)
                 {
-                    // Eguneratu jaisten ari garen fitxategiaren izena.
-                    auxLabel.Text = f.Izena + " " + f.Tamaina + "MB / " + downloaded + "MB";
                     // Kalkulatu fitxategiaren zenbat portzentai jaitsi dugun.
                     int progressPercentage = (int)((double)downloaded / f.Tamaina * 100);
-                    // Eguneratu ProgressBar balioa.
-                    auxProgressBar.Value = progressPercentage;
+                    
+                    this.Invoke((Action)(() => {
+                        // Eguneratu jaisten ari garen fitxategiaren izena.
+                        auxLabel.Text = f.Izena + " " + f.Tamaina + "MB / " + downloaded + "MB";
+                        // Eguneratu ProgressBar balioa.
+                        auxProgressBar.Value = progressPercentage;
+                    }));
+                    
                     // Itxaron 200ms sarea simulatzeko.
                     Thread.Sleep(200);
                 }
 
-                auxProgressBar.Value = 100;
-                // Adierazi TextArean fitxategia jaitsi dela.
-                this.textBox1.AppendText(f.Izena + " (" + f.Tamaina + ") OK!\n");
+                this.Invoke((Action)(() => {
+                    auxProgressBar.Value = 100;
+                    // Adierazi TextArean fitxategia jaitsi dela.
+                    this.textBox1.AppendText(f.Izena + " (" + f.Tamaina + ") OK!\n");
+                }));
             }
         }
     }
