@@ -1,4 +1,4 @@
 \# Download Simulator
 
-\## Urrutiko biltegiak frogatzeko ariketa
+\## Urrutiko biltegiak eta gatazka frogatzeko ariketa
 
